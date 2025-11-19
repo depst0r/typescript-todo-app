@@ -1,9 +1,7 @@
-
 $primary-color: #2c3e50;
 $secondary-color: #3498db;
 $success-color: #27ae60;
 $danger-color: #e74c3c;
-
 * {
     margin: 0;
     padding: 0;
@@ -20,13 +18,12 @@ body {
 #app {
     max-width: 600px;
     margin: 0 auto;
-    
     h1 {
         text-align: center;
         color: white;
         margin-bottom: 30px;
         font-size: 2.5rem;
-        text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
     }
 }
 
@@ -34,5 +31,63 @@ body {
     background: white;
     border-radius: 10px;
     padding: 30px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.todo-form {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+    input {
+        flex: 1;
+        padding: 12px;
+        border: 2px solid #ddd;
+        border-radius: 5px;
+        font-size: 16px;
+        &:focus {
+            outline: none;
+            border-color: $secondary-color;
+        }
+    }
+    button {
+        padding: 12px 20px;
+        background: $secondary-color;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+        &:hover {
+            background: #2980b9;
+        }
+    }
+}
+
+.todo-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.todo-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    background: #f8f9fa;
+    border-radius: 5px;
+    border-left: 4px solid $secondary-color;
+    span {
+        font-size: 16px;
+    }
+    button {
+        background: none;
+        border: none;
+        cursor: pointer;
+        font-size: 18px;
+        padding: 5px;
+        &:hover {
+            transform: scale(1.1);
+        }
+    }
 }
