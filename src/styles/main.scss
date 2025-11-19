@@ -156,3 +156,85 @@ body {
         padding: 20px;
     }
 }
+
+// Стили для выполненных задач
+.todo-item.completed {
+    opacity: 0.7;
+    background: #f8fff8;
+    border-left-color: $success-color;
+    .todo-text {
+        text-decoration: line-through;
+        color: #7f8c8d;
+    }
+}
+
+.todo-text {
+    cursor: pointer;
+    padding: 5px;
+    border-radius: 3px;
+    transition: all 0.2s;
+    &:hover {
+        background: rgba(52, 152, 219, 0.1);
+    }
+}
+
+.todo-actions {
+    display: flex;
+    gap: 5px;
+    align-items: center;
+}
+
+.toggle-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+    padding: 5px;
+    border-radius: 50%;
+    &:hover {
+        background: rgba(0, 0, 0, 0.1);
+        transform: scale(1.1);
+    }
+}
+
+.delete-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    padding: 5px;
+    border-radius: 50%;
+    &:hover {
+        background: rgba(231, 76, 60, 0.1);
+        transform: scale(1.1);
+    }
+}
+
+.todo-item {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    gap: 15px;
+    padding: 15px;
+    background: #f8f9fa;
+    border-radius: 5px;
+    border-left: 4px solid $secondary-color;
+    transition: all 0.3s ease;
+    &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        background: white;
+    }
+    @media (max-width: $breakpoint-mobile) {
+        padding: 12px;
+        gap: 10px;
+    }
+}
+
+.todo-item.selected {
+    border: 2px solid $secondary-color;
+    background: #e3f2fd;
+    &:hover {
+        background: #e3f2fd;
+    }
+}

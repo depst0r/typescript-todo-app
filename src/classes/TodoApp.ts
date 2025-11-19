@@ -11,7 +11,6 @@ class TodoApp {
             id: this.nextId++,
             text: text,
             completed: false,
-            
         };
 
         this.todos.push(newTodo);
@@ -27,6 +26,14 @@ class TodoApp {
         return this.todos;
     };
 
+    toggleTodo(id: number): void {
+        const todo = this.todos.find(todo => todo.id == id)
+        if (todo) {
+            todo.completed = !todo.completed;
+            this.render();
+        };
+    }
+
     private render():void {
         const todos = this.getTodos();
         this.updateUI(todos);
@@ -38,18 +45,28 @@ class TodoApp {
         if (!container) return;
 
         container.innerHTML = `
-            <div class="todo-form">
-                <input type="text" id="todoInput" placeholder="Введите задачу...">
-                <button onclick="app.addNewTodo()">Добавить</button>
+                <div class="todo-form">
+        <input type="text" id="todoInput" placeholder="Введите задачу...">
+        <button onclick="app.addNewTodo()">Добавить</button>
+    </div>
+    <div class="todo-list">
+        ${todos.map(todo => `
+        <div class="todo-item ${todo.completed ? 'completed' : ''}">
+            <span onclick="app.toggleTodo(${todo.id})" class="todo-text">
+            ${todo.link ? 
+                `<a href="${todo.link}" target="_blank" class="todo-link">${todo.text}</a>` : 
+                todo.text
+            }
+            </span>
+            <div class="todo-actions">
+            <button onclick="app.toggleTodo(${todo.id})" class="toggle-btn">
+                ${todo.completed ? '✅' : '⚪'}
+            </button>
+            <button onclick="app.deleteTodo(${todo.id})" class="delete-btn">❌</button>
             </div>
-            <div class="todo-list">
-                ${todos.map(todo => `
-                <div class="todo-item">
-                    <span>${todo.text}</span>
-                    <button onclick="app.deleteTodo(${todo.id})">❌</button>
-                </div>
-                `).join('')}
-            </div>
+        </div>
+        `).join('')}
+    </div>
             `;
     }
 
