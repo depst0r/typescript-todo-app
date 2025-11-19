@@ -12,22 +12,32 @@ module.exports = {
         extensions: ['.ts', '.js'],
     },
     module: {
-        rules: [
-            {
+        rules: [{
                 test: /\.ts$/,
                 use: 'ts-loader',
                 exclude: /node_modules/,
             },
             {
                 test: /\.scss$/,
-                use: ['style-loader', 'css-loader', 'sass-loader'],
+                use: [
+                    'style-loader',
+                    'css-loader',
+                    {
+                        loader: 'sass-loader',
+                        options: {
+                            implementation: require('sass'),
+                            sassOptions: {
+                                quietDeps: true
+                            }
+                        }
+                    }
+                ],
             },
         ],
     },
     plugins: [
         new HtmlWebpackPlugin({
             template: './src/index.html',
-            filename: 'index.html',
         }),
     ],
     devServer: {
