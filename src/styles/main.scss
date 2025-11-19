@@ -2,6 +2,7 @@ $primary-color: #2c3e50;
 $secondary-color: #3498db;
 $success-color: #27ae60;
 $danger-color: #e74c3c;
+$breakpoint-mobile: 768px;
 * {
     margin: 0;
     padding: 0;
@@ -13,17 +14,28 @@ body {
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     min-height: 100vh;
     padding: 20px;
+    @media (max-width: $breakpoint-mobile) {
+        padding: 10px;
+    }
 }
 
 #app {
-    max-width: 600px;
-    margin: 0 auto;
+    display: grid;
+    place-items: center;
+    min-height: 100vh;
     h1 {
         text-align: center;
         color: white;
         margin-bottom: 30px;
         font-size: 2.5rem;
         text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        @media (max-width: $breakpoint-mobile) {
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+        @media (max-width: 480px) {
+            font-size: 1.7rem;
+        }
     }
 }
 
@@ -32,21 +44,38 @@ body {
     border-radius: 10px;
     padding: 30px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    max-width: 600px;
+    @media (max-width: $breakpoint-mobile) {
+        padding: 20px;
+        margin: 0 10px;
+    }
+    @media (max-width: 480px) {
+        padding: 15px;
+    }
 }
 
 .todo-form {
-    display: flex;
+    display: grid;
+    grid-template-columns: 1fr auto;
     gap: 10px;
     margin-bottom: 20px;
+    @media (max-width: 480px) {
+        grid-template-columns: 1fr;
+    }
     input {
-        flex: 1;
         padding: 12px;
         border: 2px solid #ddd;
         border-radius: 5px;
         font-size: 16px;
+        width: 100%;
         &:focus {
             outline: none;
             border-color: $secondary-color;
+        }
+        @media (max-width: $breakpoint-mobile) {
+            padding: 10px;
+            font-size: 14px;
         }
     }
     button {
@@ -57,28 +86,41 @@ body {
         border-radius: 5px;
         cursor: pointer;
         font-size: 16px;
+        white-space: nowrap;
         &:hover {
             background: #2980b9;
+        }
+        @media (max-width: $breakpoint-mobile) {
+            padding: 10px 15px;
+            font-size: 14px;
         }
     }
 }
 
 .todo-list {
-    display: flex;
-    flex-direction: column;
+    display: grid;
     gap: 10px;
 }
 
 .todo-item {
-    display: flex;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: 1fr auto;
     align-items: center;
+    gap: 15px;
     padding: 15px;
     background: #f8f9fa;
     border-radius: 5px;
     border-left: 4px solid $secondary-color;
+    @media (max-width: $breakpoint-mobile) {
+        padding: 12px;
+        gap: 10px;
+    }
     span {
         font-size: 16px;
+        word-break: break-word;
+        @media (max-width: $breakpoint-mobile) {
+            font-size: 14px;
+        }
     }
     button {
         background: none;
@@ -86,8 +128,31 @@ body {
         cursor: pointer;
         font-size: 18px;
         padding: 5px;
+        display: grid;
+        place-items: center;
         &:hover {
             transform: scale(1.1);
         }
+        @media (max-width: $breakpoint-mobile) {
+            font-size: 16px;
+        }
+    }
+}
+
+.todo-item.completed {
+    opacity: 0.7;
+    border-left-color: $success-color;
+    span {
+        text-decoration: line-through;
+    }
+}
+
+.todo-empty {
+    text-align: center;
+    color: #7f8c8d;
+    padding: 40px;
+    font-style: italic;
+    @media (max-width: $breakpoint-mobile) {
+        padding: 20px;
     }
 }
